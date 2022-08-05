@@ -14,7 +14,7 @@ public abstract class Vehicle {
         this.regNumber = regNumber;
     }
 
-    boolean isCorrectRegNumber(String regNumber) {
+    private boolean isCorrectRegNumber(String regNumber) {
 
         return Pattern.matches(REG_NUMBER_PATTERN, regNumber);
     }
