@@ -6,14 +6,13 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public interface StringSearchTest {
+
+    //https://www.novatec-gmbh.de/blog/interface-contract-with-junit-5/
+    //https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-interfaces-and-default-methods
     StringSearch s();
 
     @ParameterizedTest
@@ -81,7 +80,7 @@ public interface StringSearchTest {
     @ParameterizedTest
     //Arrange
     @ValueSource(strings = {"b", "ab", "acdefb", "AZk b" })
-    @DisplayName("assert search funcion correctly recognizes postfix of the string")
+    @DisplayName("assert search function correctly recognizes postfix of the string")
     default void assertSearchFunctionCorrectlyRecognizesPostfixOfTheString(String whole){
         //Arrange
         String part = "b";
