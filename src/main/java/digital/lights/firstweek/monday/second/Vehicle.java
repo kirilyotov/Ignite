@@ -1,13 +1,16 @@
 package digital.lights.firstweek.monday.second;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public abstract class Vehicle {
     private final String  regNumber;
 
-    static final String REG_NUMBER_PATTERN = "^[A-Z]{2}\\d{4}[A-Z]{2}$";
+    static final String REG_NUMBER_PATTERN = "^[A-Z]{2}\s?\\d{4}\s?[A-Z]{2}$";
 
     public Vehicle(String regNumber) {
+        if(regNumber == null)
+            throw new NullPointerException();
         if (!isCorrectRegNumber(regNumber)) {
             throw new IllegalArgumentException("Not correct registration Number!");
         }
@@ -25,7 +28,19 @@ public abstract class Vehicle {
 
     public abstract double fuelConsumption();
 
+    @Override
+    public boolean equals(Object o){
+        if(this == o)
+            return true;
+        if(o == null)
+            return false;
+        if(this.getClass() != o.getClass())
+            return false;
 
+        Vehicle v = (Vehicle) o;
+        return this.getRegNumber().equals(v.getRegNumber());
+
+    }
     @Override
     public int hashCode() {
         return this.regNumber.hashCode();
