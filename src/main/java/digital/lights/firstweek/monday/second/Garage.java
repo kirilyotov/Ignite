@@ -3,7 +3,7 @@ package digital.lights.firstweek.monday.second;
 import java.util.Vector;
 
 public class Garage {
-    Vector<Vehicle> vehicles;
+    private Vector<Vehicle> vehicles;
 
     public Garage() {
         vehicles = new Vector<>();
