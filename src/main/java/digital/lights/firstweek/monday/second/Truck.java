@@ -11,12 +11,10 @@ public class Truck extends Vehicle {
     public Truck(String regNumber, double minLoad, double maxLoad) {
         super(regNumber);
 
-        if (isNegative(maxLoad)) {
-            throw new IllegalArgumentException("Max load of truck should be positive number!");
+        if (isNegative(maxLoad) || isNegative(minLoad)) {
+            throw new IllegalArgumentException("Min and  max load of truck should be positive number!");
         }
-        if (isNegative(minLoad)) {
-            throw new IllegalArgumentException("Min load of truc should be positive number!");
-        }
+
         if (!isCorrectMinLoad(minLoad, maxLoad)) {
             throw new IllegalArgumentException("Min load should be less or equal to max load of truck!");
         }
@@ -30,7 +28,7 @@ public class Truck extends Vehicle {
     }
 
     private boolean isNegative(double load) {
-        return load < 0;
+        return load <= 0;
     }
 
 
@@ -41,7 +39,8 @@ public class Truck extends Vehicle {
 
     @Override
     public String toString() {
-        return "Truck  with registration number " + getRegNumber() + "has got min load " + getMinLoad() + " and  max " +
+        return "Truck  with registration number " + getRegNumber() + " has got min load " + getMinLoad() + " and  max" +
+                " " +
                 "load" + getMaxLoad();
     }
 

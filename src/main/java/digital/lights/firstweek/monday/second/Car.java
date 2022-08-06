@@ -26,7 +26,7 @@ public class Car extends Vehicle {
 
     @Override
     public String toString() {
-        return "Car with registration number: " + getRegNumber() + "has got " + getEngineVolume() + " liters engine " +
+        return "Car with registration number: " + getRegNumber() + " has got " + getEngineVolume() + " liters engine " +
                 "volume and " + fuelConsumption() + "l/100 km consumption.";
     }
 
