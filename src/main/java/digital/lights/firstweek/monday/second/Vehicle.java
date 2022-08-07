@@ -34,10 +34,9 @@ public abstract class Vehicle {
             return true;
         if(o == null)
             return false;
-        if(this.getClass() != o.getClass())
+        if(!(o instanceof Vehicle v))
             return false;
 
-        Vehicle v = (Vehicle) o;
         return this.getRegNumber().equals(v.getRegNumber());
 
     }

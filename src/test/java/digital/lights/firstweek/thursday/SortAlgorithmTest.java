@@ -4,10 +4,11 @@ package digital.lights.firstweek.thursday;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public interface SortAlgorithmTest {
     SortAlgorithm sortAlgorithm();
 
@@ -56,7 +57,7 @@ public interface SortAlgorithmTest {
     @DisplayName("assert sort algorithm with reversed order")
     default void assertSortAlgorithmWithReversedOrder() {
         //Arrange
-        int[] arrayToSort = {99, 97, 17, 17, 16, 13, 9, 0, -5};
+        int[] arrayToSort = {99, 77, 17, 17, 16, 13, 9, 0, -5};
         int[] expectedArray = {-5, 0, 9, 13, 16, 17, 17, 77, 99};
 
         //Act
