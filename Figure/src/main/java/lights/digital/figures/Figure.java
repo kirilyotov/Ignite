@@ -1,4 +1,4 @@
-package digital.lights.secondweek.first.figures;
+package lights.digital.figures;
 
 public abstract class Figure {
     abstract double perimeter();
