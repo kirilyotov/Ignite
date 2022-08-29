@@ -5,19 +5,20 @@ import lights.digital.factory.random.RandomFigureFactory;
 import lights.digital.figures.Figure;
 import lights.digital.file.FileIO;
 
+
 import java.util.Scanner;
 import java.util.Vector;
 
-public final class CreateFigures implements Functions {
+public class CreateFigures implements Functions {
 
     private Vector<Figure> factoryFigures;
 
     public CreateFigures() {
-        factoryFigures = new Vector<Figure>();
+        factoryFigures = new Vector<>();
     }
 
     @Override
-    public void generateRandomFigures() {
+    public void generateRandomFigures() throws Exception {
         System.out.print("How many figures to generate?\nn = ");
         int figuresToCreate = readNumber();
 
@@ -26,6 +27,7 @@ public final class CreateFigures implements Functions {
         for (int i = 0; i < figuresToCreate; i++) {
 
             factoryFigures.add(rff.create());
+
         }
         print();
     }
@@ -51,11 +53,9 @@ public final class CreateFigures implements Functions {
         Vector<String> data = fileIO.readAllFile();
 
         FigureFactory figureFactory = new FigureFactory();
-        for (int i = 0; i < data.size(); i++) {
-            factoryFigures.add(figureFactory.getFigure(data.get(i)));
+        for (String datum : data) {
+            factoryFigures.add(figureFactory.getFigure(datum));
         }
-
-
     }
 
     @Override
@@ -78,7 +78,7 @@ public final class CreateFigures implements Functions {
         System.out.println("index: ");
         int index = readNumber();
 
-        factoryFigures.add(factoryFigures.get(index).clone());
+        factoryFigures.add(factoryFigures.get(index-1).clone());
 
         System.out.println("Cloned element: ");
         factoryFigures.get(factoryFigures.size());
@@ -94,24 +94,21 @@ public final class CreateFigures implements Functions {
 
     @Override
     public void print() {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 0; i < factoryFigures.size(); i++) {
-            stringBuffer.append("\n" + factoryFigures.get(i).toString());
+        StringBuilder stringBuffer = new StringBuilder();
+        for (Figure factoryFigure : factoryFigures) {
+            stringBuffer.append("\n").append(factoryFigure.toString());
         }
-        System.out.println(stringBuffer.toString());
+        System.out.println(stringBuffer);
     }
 
     private int readNumber() {
-        System.out.print("index = ");
         String line = readLine();
-        int number = Integer.parseInt(line);
-        return number;
+        return Integer.parseInt(line);
     }
 
     private String readLine() {
         Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
-        return line;
+        return scanner.nextLine();
     }
 
 }

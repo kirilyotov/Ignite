@@ -2,7 +2,7 @@ package lights.digital.createfigures;
 
 public interface Functions {
 
-    void generateRandomFigures();
+    void generateRandomFigures() throws Exception;
 
     void readFiguresFromSTDIN();
 

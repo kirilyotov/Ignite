@@ -1,9 +1,21 @@
 package lights.digital;
 
+
 import lights.digital.commandline.CommandLine;
+import lights.digital.createfigures.Functions;
+import lights.digital.factory.input.InputFactory;
+import lights.digital.factory.random.RandomFactory;
+import lights.digital.figures.Figure;
+import lights.digital.file.FileFactory;
+import org.reflections.Reflections;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
+
+
         CommandLine commandLine = CommandLine.getInstance();
         commandLine.run();
 

@@ -13,9 +13,13 @@ public class FileIO implements FileFactory {
         this.path = path;
     }
 
+    /**
+     * Reads all data of file and saving it to vector.
+     * @return vector with figures.
+     */
     public Vector<String > readAllFile() {
 
-        Vector<String> data = new Vector<String>();
+        Vector<String> data = new Vector<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String line = bufferedReader.readLine();
 
@@ -33,6 +37,10 @@ public class FileIO implements FileFactory {
         return data;
     }
 
+    /**
+     * Saving all data to file.
+     * @param figures vector with figures..
+     */
     public void saveToFile(Vector<Figure> figures) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (int i = 0; i < figures.size(); i++) {

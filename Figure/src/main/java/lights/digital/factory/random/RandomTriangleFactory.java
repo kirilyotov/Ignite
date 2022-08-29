@@ -7,8 +7,12 @@ import java.util.Random;
 
 public final class RandomTriangleFactory implements RandomFactory {
 
-    public RandomTriangleFactory(){}
     Random random = new Random();
+
+    /**
+     *  Creates random triangle with random data.
+     * @return reference to random created triangle.
+     */
     public Figure create(){
         double a, b , c;
         a = random.nextDouble(0.1,100.0);
