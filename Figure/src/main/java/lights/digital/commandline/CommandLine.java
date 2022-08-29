@@ -4,19 +4,38 @@ import lombok.Setter;
 
 import java.util.Scanner;
 
+/**
+ * Singleton class for reading user commands.
+ */
 public class CommandLine {
+
+    // Default color of symbols in console.
     private static final String ANSI_RESET = "\u001B[0m";
+
+
+    // Red color of symbols in console.
     private static final String ANSI_RED = "\u001B[31m";
+
     private @Setter boolean exitProgram = false;
+
+    //Instance of class
     static CommandLine theInstance = null;
 
-
+    /**
+     * Creates instance of current class.
+     *
+     * @return reference to current class.
+     */
     static public CommandLine getInstance() {
         if (theInstance == null)
             theInstance = new CommandLine();
         return theInstance;
     }
 
+    /**
+     * Run program.
+     * Reading user commands, until exit is written in console.
+     */
     public void run() {
         do {
             System.out.print("> ");
@@ -33,10 +52,17 @@ public class CommandLine {
         } while (!exitProgram);
     }
 
+    /**
+     * Private constructor for singleton.
+     */
     private CommandLine() {
     }
 
-    private void getCommand(String line) {
+    /**
+     * Reading line and checking it commands for compliance.
+     * @param line String to check.
+     */
+    private void getCommand(String line) throws Exception {
         Commands c = null;
 
         for (Commands commands : Commands.values()) {
