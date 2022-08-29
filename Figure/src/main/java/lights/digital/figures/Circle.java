@@ -2,10 +2,8 @@ package lights.digital.figures;
 
 import lombok.Getter;
 
-public class Circle extends Figure {
-
-    private final @Getter double  radius;
-
+public class Circle implements Figure {
+    private final @Getter double radius;
 
     public Circle(double radius) {
         if (radius <= 0)
@@ -19,10 +17,14 @@ public class Circle extends Figure {
     }
 
     @Override
-    public double area() { return  Math.PI * radius * radius;}
+    public double area() {
+        return Math.PI * radius * radius;
+    }
 
     @Override
-    public Figure clone(){return  new Circle(radius);}
+    public Figure clone() {
+        return new Circle(radius);
+    }
 
     @Override
     public String toString() {

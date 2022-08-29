@@ -2,10 +2,11 @@ package lights.digital.figures;
 
 import lombok.Getter;
 
-public class Rectangle extends Figure {
+public class Rectangle implements Figure {
+
+
     private final @Getter double a;
     private final @Getter double b;
-
 
     public Rectangle(double a, double b) {
         if (a <= 0 || b <= 0) {
@@ -21,17 +22,17 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    public Figure clone() {
-        return new Rectangle(a, b);
-    }
-
-    @Override
     public double area() {
         return a * b;
     }
 
     @Override
-    public String toString() {
+    public Figure clone() {
+        return new Rectangle(a, b);
+    }
+
+    @Override
+    public String toString()  {
         return "rectangle " + String.format("%.2f", a) + " " + String.format("%.2f", b);
     }
 }

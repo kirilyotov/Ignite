@@ -4,7 +4,7 @@ import lombok.Getter;
 
 import static java.lang.Math.sqrt;
 
-public class Triangle extends Figure {
+public class Triangle implements Figure {
     private final @Getter double a;
     private final @Getter double b;
     private final @Getter double c;
