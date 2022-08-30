@@ -5,10 +5,9 @@ import lights.digital.figures.Figure;
 
 
 public class CircleFactory implements InputFactory {
-
-    public Figure create(String[] data){
+    public Figure create(String[] data) {
         double r = Double.parseDouble(data[1]);
-        return  new Circle(r);
+        return new Circle(r);
     }
 
 }
