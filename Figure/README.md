@@ -84,7 +84,7 @@ Ex: creating figure Square
 ## Used resources ##
 - - -
 
-* [https://www.baeldung.com/a-guide-to-java-enums](#https://www.baeldung.com/a-guide-to-java-enums)<br>
-* [https://code.google.com/archive/p/reflections/](#https://code.google.com/archive/p/reflections/)
-* [https://refactoring.guru/design-patterns/factory-method](#https://refactoring.guru/design-patterns/factory-method)
+* [https://www.baeldung.com/a-guide-to-java-enums](https://www.baeldung.com/a-guide-to-java-enums)<br>
+* [https://code.google.com/archive/p/reflections/](https://code.google.com/archive/p/reflections/)
+* [https://refactoring.guru/design-patterns/factory-method](https://refactoring.guru/design-patterns/factory-method)
 * Cătălin Tudose (2020) JUnit in Action, 3rd ed
