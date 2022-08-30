@@ -1,6 +1,6 @@
-package lights.digital.createfigures;
+package lights.digital.engine;
 
-public interface Functions {
+public interface EngineFunctions {
 
     void generateRandomFigures() throws Exception;
 

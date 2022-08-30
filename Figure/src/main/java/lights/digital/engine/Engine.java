@@ -1,4 +1,4 @@
-package lights.digital.createfigures;
+package lights.digital.engine;
 
 import lights.digital.factory.input.FigureFactory;
 import lights.digital.factory.random.RandomFigureFactory;
@@ -9,12 +9,12 @@ import lights.digital.file.FileIO;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class CreateFigures implements Functions {
+public class Engine implements EngineFunctions {
 
-    private Vector<Figure> factoryFigures;
+    private Vector<Figure> figures;
 
-    public CreateFigures() {
-        factoryFigures = new Vector<>();
+    public Engine() {
+        figures = new Vector<>();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CreateFigures implements Functions {
 
         for (int i = 0; i < figuresToCreate; i++) {
 
-            factoryFigures.add(rff.create());
+            figures.add(rff.create());
 
         }
         print();
@@ -40,7 +40,7 @@ public class CreateFigures implements Functions {
 
         for (int i = 0; i < n; i++) {
             String line = readLine();
-            factoryFigures.add(figureFactory.getFigure(line));
+            figures.add(figureFactory.getFigure(line));
         }
     }
 
@@ -54,7 +54,7 @@ public class CreateFigures implements Functions {
 
         FigureFactory figureFactory = new FigureFactory();
         for (String datum : data) {
-            factoryFigures.add(figureFactory.getFigure(datum));
+            figures.add(figureFactory.getFigure(datum));
         }
     }
 
@@ -64,11 +64,11 @@ public class CreateFigures implements Functions {
         int index = readNumber();
 
         try {
-            factoryFigures.remove(index);
+            figures.remove(index);
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new ArrayIndexOutOfBoundsException("Not correct index!");
         }
-        System.out.println("Now elements are " + factoryFigures.size());
+        System.out.println("Now elements are " + figures.size());
         print();
 
     }
@@ -78,10 +78,10 @@ public class CreateFigures implements Functions {
         System.out.println("index: ");
         int index = readNumber();
 
-        factoryFigures.add(factoryFigures.get(index-1).clone());
+        figures.add(figures.get(index-1).clone());
 
         System.out.println("Cloned element: ");
-        factoryFigures.get(factoryFigures.size());
+        figures.get(figures.size());
     }
 
     @Override
@@ -89,13 +89,13 @@ public class CreateFigures implements Functions {
         System.out.println("Enter file name: ");
         String file = readLine();
         FileIO fileIO = new FileIO(file);
-        fileIO.saveToFile(factoryFigures);
+        fileIO.saveToFile(figures);
     }
 
     @Override
     public void print() {
         StringBuilder stringBuffer = new StringBuilder();
-        for (Figure factoryFigure : factoryFigures) {
+        for (Figure factoryFigure : figures) {
             stringBuffer.append("\n").append(factoryFigure.toString());
         }
         System.out.println(stringBuffer);
