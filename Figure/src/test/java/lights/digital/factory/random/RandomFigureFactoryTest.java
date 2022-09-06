@@ -1,31 +1,58 @@
 package lights.digital.factory.random;
 
-import org.junit.jupiter.api.RepeatedTest;
+import lights.digital.figures.Figure;
 import org.junit.jupiter.api.Test;
+import org.reflections.Reflections;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public interface RandomFigureFactoryTest {
-    RandomFactory randomFactory();
+public class RandomFigureFactoryTest {
+    Reflections reflections = new Reflections("lights.digital.figure");
+    Set<Class<? extends Figure>> subTypes =
+            reflections.getSubTypesOf(Figure.class);
 
-    @RepeatedTest(20)
-    default void creatingRandomFigureWithRandomParametersExpectedTwoDifferentObjectsFromSameType()
-            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    boolean booleanArrayIsTrue(boolean[] arr) {
+        for (var bool : arr) {
+            if (!bool)
+                return false;
+        }
+        return true;
+    }
 
+    boolean areDifferentTypes(Figure[] figures) {
 
-        Constructor<? extends RandomFactory> constructor = randomFactory().getClass().getConstructor();
-        Object[] arguments = new Object[]{};
+        Object[] objectSubTypes = subTypes.toArray();
 
-        RandomFactory newRandomFactory = (RandomFactory) constructor.newInstance(arguments);
+        boolean[] createdSubType = new boolean[objectSubTypes.length];
 
-        assertNotEquals(newRandomFactory.create(), randomFactory().create());
+        for (int i = 0; i < figures.length; i++) {
+            int j = 0;
+            for (var s : subTypes) {
+                if (figures[i].equals(s.getName())) {
+                    createdSubType[j] = true;
+                }
+                j++;
+            }
+
+        }
+        return booleanArrayIsTrue(createdSubType);
     }
 
     @Test
-    default void createRandomFigureWithCorrectParameters() {
+    void createRandomFiguresFromAllFigureSubTypes() throws Exception {
+        //Arrange
+        RandomFigureFactory randomFactory = new RandomFigureFactory();
 
+        Figure[] figures = new Figure[subTypes.size() * 3];
+
+        //Act
+        for (int i = 0; i < figures.length; i++) {
+            figures[i] = randomFactory.create();
+        }
+
+        //Assert
+        assertTrue(areDifferentTypes(figures));
     }
 }

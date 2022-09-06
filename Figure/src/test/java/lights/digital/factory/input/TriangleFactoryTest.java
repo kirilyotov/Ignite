@@ -1,7 +1,11 @@
 package lights.digital.factory.input;
 
-import static org.junit.jupiter.api.Assertions.*;
+class TriangleFactoryTest implements InputFactoryTest {
+    public InputFactory inputFactory() {
+        return new TriangleFactory();
+    }
 
-class TriangleFactoryTest {
-
+    public String name() {
+        return "Triangles.txt";
+    }
 }

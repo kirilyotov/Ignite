@@ -20,8 +20,8 @@ class TriangleTest extends FigureTest {
     @ParameterizedTest
     @CsvSource({"5.6, 5, 13", "10, 10, 10", "11, 5, 15", "3 , 4, 5"})
     void correctAreaOfFigureWithGivenPositiveParameters(double a, double b, double c) {
-        double perimeter = (a+ b +c)/2;
-        assertEquals(sqrt(perimeter* (perimeter - a) * (perimeter - b)*(perimeter - c)), figure(a, b, c).area());
+        double perimeter = (a + b + c) / 2;
+        assertEquals(sqrt(perimeter * (perimeter - a) * (perimeter - b) * (perimeter - c)), figure(a, b, c).area());
     }
 
     @ParameterizedTest

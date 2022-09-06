@@ -1,7 +1,12 @@
 package lights.digital.factory.input;
 
-import static org.junit.jupiter.api.Assertions.*;
+class CircleFactoryTest implements InputFactoryTest {
+    public InputFactory inputFactory() {
+        return new CircleFactory();
+    }
 
-class CircleFactoryTest {
+    public String name() {
+        return "Circles.txt";
+    }
 
 }

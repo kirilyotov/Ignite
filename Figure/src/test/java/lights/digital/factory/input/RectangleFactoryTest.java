@@ -1,7 +1,11 @@
 package lights.digital.factory.input;
 
-import static org.junit.jupiter.api.Assertions.*;
+class RectangleFactoryTest implements InputFactoryTest {
+    public InputFactory inputFactory() {
+        return new RectangleFactory();
+    }
 
-class RectangleFactoryTest {
-
+    public String name() {
+        return "Rectangles.txt";
+    }
 }
