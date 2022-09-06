@@ -2,6 +2,8 @@ package lights.digital.figures;
 
 import lombok.Getter;
 
+import java.util.Locale;
+
 public class Rectangle implements Figure {
 
 
@@ -32,7 +34,8 @@ public class Rectangle implements Figure {
     }
 
     @Override
-    public String toString()  {
-        return "rectangle " + String.format("%.2f", a) + " " + String.format("%.2f", b);
+    public String toString() {
+        return "rectangle " + String.format(Locale.ROOT, "%.2f", a) + " " +
+                String.format(Locale.ROOT, "%.2f", b);
     }
 }

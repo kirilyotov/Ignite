@@ -2,6 +2,8 @@ package lights.digital.figures;
 
 import lombok.Getter;
 
+import java.util.Locale;
+
 import static java.lang.Math.sqrt;
 
 public class Triangle implements Figure {
@@ -37,7 +39,8 @@ public class Triangle implements Figure {
 
     @Override
     public String toString() {
-        return "triangle " + String.format("%.2f", a) + " " + String.format("%.2f", b) + " " +
-                String.format("%.2f", c);
+        return "triangle " + String.format(Locale.ROOT, "%.2f", a) + " " +
+                String.format(Locale.ROOT, "%.2f", b) + " " +
+                String.format(Locale.ROOT, "%.2f", c);
     }
 }

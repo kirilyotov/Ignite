@@ -2,6 +2,8 @@ package lights.digital.figures;
 
 import lombok.Getter;
 
+import java.util.Locale;
+
 public class Circle implements Figure {
     private final @Getter double radius;
 
@@ -28,6 +30,6 @@ public class Circle implements Figure {
 
     @Override
     public String toString() {
-        return String.format("circle %.2f", radius);
+        return String.format(Locale.ROOT, "circle %.2f", radius);
     }
 }
