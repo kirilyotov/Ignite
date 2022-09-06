@@ -4,7 +4,6 @@ package lights.digital.factory.random;
 import lights.digital.figures.Figure;
 import org.reflections.Reflections;
 
-
 import java.util.Random;
 import java.util.Set;
 
@@ -25,9 +24,10 @@ public class RandomFigureFactory {
 
     /**
      * Creating random figure.
+     *
      * @return
      */
-    public Figure create() throws  Exception {
+    public Figure create() throws Exception {
         int ind = random.nextInt(subTypes.size());
         int position = 0;
         try {
@@ -36,7 +36,7 @@ public class RandomFigureFactory {
                     return type.getConstructor().newInstance().create();
                 position++;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("Problem with creating random figure!");
         }
         return null;
