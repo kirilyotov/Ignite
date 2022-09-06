@@ -2,6 +2,8 @@ package lights.digital.commandline;
 
 import lights.digital.utils.Utils;
 
+import java.util.Scanner;
+
 /**
  * Commands from which user chooses.
  */
@@ -11,8 +13,8 @@ public enum Commands implements CommandsInstance {
      */
     RANDOM {
         @Override
-        public void getCommand() throws Exception {
-            createFigures.generateRandomFigures();
+        public void getCommand(Scanner scanner) throws Exception {
+            createFigures.generateRandomFigures(scanner);
         }
     },
     /**
@@ -20,8 +22,8 @@ public enum Commands implements CommandsInstance {
      */
     STDIN {
         @Override
-        public void getCommand() {
-            createFigures.readFiguresFromSTDIN();
+        public void getCommand(Scanner scanner) {
+            createFigures.readFiguresFromSTDIN(scanner);
         }
     },
     /**
@@ -29,8 +31,8 @@ public enum Commands implements CommandsInstance {
      */
     FILE {
         @Override
-        public void getCommand() {
-            createFigures.readFiguresFromFile();
+        public void getCommand(Scanner scanner) {
+            createFigures.readFiguresFromFile(scanner);
         }
     },
     /**
@@ -38,8 +40,8 @@ public enum Commands implements CommandsInstance {
      */
     DELETE {
         @Override
-        public void getCommand() {
-            createFigures.deleteElementOnPosition();
+        public void getCommand(Scanner scanner) {
+            createFigures.deleteElementOnPosition(scanner);
         }
     },
     /**
@@ -47,8 +49,8 @@ public enum Commands implements CommandsInstance {
      */
     DUPLICATE {
         @Override
-        public void getCommand() {
-            createFigures.duplicateFigure();
+        public void getCommand(Scanner scanner) {
+            createFigures.duplicateFigure(scanner);
         }
     },
     /**
@@ -56,8 +58,8 @@ public enum Commands implements CommandsInstance {
      */
     SAVE {
         @Override
-        public void getCommand() {
-            createFigures.saveToFile();
+        public void getCommand(Scanner scanner) {
+            createFigures.saveToFile(scanner);
         }
     },
     /**
@@ -65,7 +67,7 @@ public enum Commands implements CommandsInstance {
      */
     HELP {
         @Override
-        public void getCommand() {
+        public void getCommand(Scanner scanner) {
             Utils.help();
         }
     },
@@ -74,7 +76,7 @@ public enum Commands implements CommandsInstance {
      */
     EXIT {
         @Override
-        public void getCommand() {
+        public void getCommand(Scanner scanner) {
             CommandLine commandLine = CommandLine.getInstance();
             commandLine.setExitProgram(true);
         }

@@ -1,18 +1,20 @@
 package lights.digital.engine;
 
+import java.util.Scanner;
+
 public interface EngineFunctions {
 
-    void generateRandomFigures() throws Exception;
+    void generateRandomFigures(Scanner scanner) throws Exception;
 
-    void readFiguresFromSTDIN();
+    void readFiguresFromSTDIN(Scanner scanner);
 
-    void readFiguresFromFile();
+    void readFiguresFromFile(Scanner scanner);
 
-    void deleteElementOnPosition();
+    void deleteElementOnPosition(Scanner scanner);
 
-    void duplicateFigure();
+    void duplicateFigure(Scanner scanner);
 
-    void saveToFile();
+    void saveToFile(Scanner scanner);
 
     void print();
 }

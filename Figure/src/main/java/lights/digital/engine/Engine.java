@@ -4,23 +4,23 @@ import lights.digital.factory.input.FigureFactory;
 import lights.digital.factory.random.RandomFigureFactory;
 import lights.digital.figures.Figure;
 import lights.digital.file.FileIO;
-
+import lombok.Getter;
 
 import java.util.Scanner;
 import java.util.Vector;
 
 public class Engine implements EngineFunctions {
 
-    private Vector<Figure> figures;
+    private final @Getter Vector<Figure> figures;
 
     public Engine() {
         figures = new Vector<>();
     }
 
     @Override
-    public void generateRandomFigures() throws Exception {
+    public void generateRandomFigures(Scanner scanner) throws Exception {
         System.out.print("How many figures to generate?\nn = ");
-        int figuresToCreate = readNumber();
+        int figuresToCreate = readNumber(scanner);
 
         RandomFigureFactory rff = new RandomFigureFactory();
 
@@ -33,40 +33,51 @@ public class Engine implements EngineFunctions {
     }
 
     @Override
-    public void readFiguresFromSTDIN() {
-        System.out.println("How many figures to read from console?\nn = ");
-        int n = readNumber();
+    public void readFiguresFromSTDIN(Scanner scanner) {
+        System.out.print("How many figures to read from console?\nn = ");
+        int n = readNumber(scanner);
         FigureFactory figureFactory = new FigureFactory();
 
         for (int i = 0; i < n; i++) {
-            String line = readLine();
-            figures.add(figureFactory.getFigure(line));
+            String line = readLine(scanner);
+            try {
+                figures.add(FigureFactory.create(line));
+            } catch (Exception e) {
+                --i;
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     @Override
-    public void readFiguresFromFile() {
-        System.out.println("Enter file name: ");
-        String file = readLine();
+    public void readFiguresFromFile(Scanner scanner) {
+        System.out.print("Enter file name: ");
+        String file = readLine(scanner);
 
-        FileIO fileIO = new FileIO(file);
-        Vector<String> data = fileIO.readAllFile();
+        FileIO fileIO = new FileIO();
+        Vector<String> data = fileIO.readAllFile(file);
 
         FigureFactory figureFactory = new FigureFactory();
+
         for (String datum : data) {
-            figures.add(figureFactory.getFigure(datum));
+            try {
+                figures.add(FigureFactory.create(datum));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+        print();
     }
 
     @Override
-    public void deleteElementOnPosition() {
+    public void deleteElementOnPosition(Scanner scanner) {
         System.out.print("index = ");
-        int index = readNumber();
+        int index = readNumber(scanner);
 
         try {
             figures.remove(index);
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new ArrayIndexOutOfBoundsException("Not correct index!");
+            throw new IllegalArgumentException("Not correct index!");
         }
         System.out.println("Now elements are " + figures.size());
         print();
@@ -74,22 +85,25 @@ public class Engine implements EngineFunctions {
     }
 
     @Override
-    public void duplicateFigure() {
+    public void duplicateFigure(Scanner scanner) {
         System.out.println("index: ");
-        int index = readNumber();
+        int index = readNumber(scanner);
+        if (index >= figures.size() || index < 0)
+            throw new IllegalArgumentException("Not correct index!");
 
-        figures.add(figures.get(index-1).clone());
+        figures.add(figures.get(index).clone());
 
         System.out.println("Cloned element: ");
-        figures.get(figures.size());
+        Figure clonedFigure = figures.get(figures.size() - 1);
+        System.out.println(clonedFigure.toString());
     }
 
     @Override
-    public void saveToFile() {
+    public void saveToFile(Scanner scanner) {
         System.out.println("Enter file name: ");
-        String file = readLine();
-        FileIO fileIO = new FileIO(file);
-        fileIO.saveToFile(figures);
+        String file = readLine(scanner);
+        FileIO fileIO = new FileIO();
+        fileIO.saveToFile(file, figures);
     }
 
     @Override
@@ -101,13 +115,12 @@ public class Engine implements EngineFunctions {
         System.out.println(stringBuffer);
     }
 
-    private int readNumber() {
-        String line = readLine();
+    private int readNumber(Scanner scanner) {
+        String line = readLine(scanner);
         return Integer.parseInt(line);
     }
 
-    private String readLine() {
-        Scanner scanner = new Scanner(System.in);
+    private String readLine(Scanner scanner) {
         return scanner.nextLine();
     }
 

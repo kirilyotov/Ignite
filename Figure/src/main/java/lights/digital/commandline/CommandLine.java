@@ -18,8 +18,10 @@ public class CommandLine {
 
     private @Setter boolean exitProgram = false;
 
+
     //Instance of class
     static CommandLine theInstance = null;
+    static Scanner scanner;
 
     /**
      * Creates instance of current class.
@@ -37,16 +39,17 @@ public class CommandLine {
      * Reading user commands, until exit is written in console.
      */
     public void run() {
+        scanner = new Scanner(System.in);
+
         do {
             System.out.print("> ");
-            Scanner in = new Scanner(System.in);
-            String line = in.nextLine();
+            String line = scanner.nextLine();
 
             try {
                 getCommand(line);
             } catch (Exception e) {
                 System.out.println(ANSI_RED + e.getMessage());
-                System.out.println("\nType \'help\' to see list of commands. " + ANSI_RESET);
+                System.out.println("\nType 'help' to see list of commands. " + ANSI_RESET);
             }
 
         } while (!exitProgram);
@@ -60,21 +63,23 @@ public class CommandLine {
 
     /**
      * Reading line and checking it commands for compliance.
+     *
      * @param line String to check.
      */
     private void getCommand(String line) throws Exception {
         Commands c = null;
 
+
         for (Commands commands : Commands.values()) {
             if (commands.name().equalsIgnoreCase(line.toUpperCase())) {
+
                 c = commands;
                 break;
             }
         }
         if (c == null)
             throw new IllegalArgumentException("Command not found!");
-
-        c.getCommand();
+        c.getCommand(scanner);
     }
 
 }
