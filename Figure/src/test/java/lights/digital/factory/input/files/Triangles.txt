@@ -1,0 +1,4 @@
+triangle 3.00 4.00 5.00
+triangle 11.00 12.00 14.00
+triangle 0.10 0.10 0.10
+triangle 100.03 100.03 100.03
