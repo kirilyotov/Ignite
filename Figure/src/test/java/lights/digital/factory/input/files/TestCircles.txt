@@ -1,0 +1,6 @@
+circle 3.00
+circle 3.50
+circle 4.66
+circle 78.99
+circle 9999.99
+circle 0.11

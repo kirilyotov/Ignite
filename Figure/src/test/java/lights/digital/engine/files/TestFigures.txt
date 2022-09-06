@@ -1,0 +1,6 @@
+circle 3.00
+rectangle 190.00 12000.00
+circle 0.11
+triangle 11.00 12.00 14.00
+triangle 11.00 12.00 11.00
+rectangle 7.77 0.33

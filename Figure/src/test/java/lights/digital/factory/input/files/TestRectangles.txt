@@ -1,0 +1,4 @@
+rectangle 3.00 12.50
+rectangle 7.77 0.33
+rectangle 0.01 99.00
+rectangle 190.00 12000.00
