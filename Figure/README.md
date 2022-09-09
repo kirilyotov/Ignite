@@ -87,4 +87,5 @@ Ex: creating figure Square
 * [https://www.baeldung.com/a-guide-to-java-enums](https://www.baeldung.com/a-guide-to-java-enums)<br>
 * [https://code.google.com/archive/p/reflections/](https://code.google.com/archive/p/reflections/)
 * [https://refactoring.guru/design-patterns/factory-method](https://refactoring.guru/design-patterns/factory-method)
+* [https://github.com/tchapi/markdown-cheatsheet](https://github.com/tchapi/markdown-cheatsheet)
 * Cătălin Tudose (2020) JUnit in Action, 3rd ed

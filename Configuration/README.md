@@ -68,4 +68,5 @@ json example:
 * [Design patterns](https://refactoring.guru/design-patterns/factory-method)
 * [Reflections](https://code.google.com/archive/p/reflections/)
 * [.jar file to .exe](http://launch4j.sourceforge.net/)
+* [README.md styling](https://github.com/tchapi/markdown-cheatsheet)
 * Cătălin Tudose (2020) JUnit in Action, 3rd ed
