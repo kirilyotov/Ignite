@@ -8,5 +8,5 @@
 	Design patterns (Factory)
 	
 ## Date ##
-start date: 01.08.2022
+start date: 01.08.2022 <br>
 final date: 09.09.2022
