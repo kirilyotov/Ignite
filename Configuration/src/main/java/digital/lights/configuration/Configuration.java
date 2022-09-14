@@ -1,5 +1,6 @@
 package digital.lights.configuration;
 
+import digital.lights.path.validator.PathValidator;
 import lombok.Getter;
 
 public class Configuration {
@@ -10,7 +11,10 @@ public class Configuration {
         if (logFilePath == null || logLevel == null) {
             throw new IllegalArgumentException("Not given log-level or log-path!");
         }
-        this.logFilePath = logFilePath.trim();
-        this.logLevel = logLevel.trim();
+        if (!PathValidator.isValidPath(logFilePath) || logFilePath == "") {
+            throw new IllegalArgumentException("Not correct logFilePath!");
+        }
+        this.logFilePath = logFilePath;
+        this.logLevel = logLevel;
     }
 }

@@ -21,7 +21,7 @@ public class CmdParser {
         if (cmd.hasOption("c")) {
             try {
                 configuration = ConfigurationReaderFactory.crete(cmd);
-            } catch (RuntimeException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }

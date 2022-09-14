@@ -36,4 +36,23 @@ class ConfigurationTest {
         String actualMessage = exception.getMessage();
         assertTrue(expectedMessage.contains(actualMessage));
     }
+
+    @Test
+    void assertNotCorrectLogFilePathThrowsIllegalArgumentException() {
+        String notValidPath1 = "out/artifacts/Configuration_jar/resources/config.ini?";
+        String notValidPath2 = "out/artifacts/Configuration_jar/resources/config.ini*";
+        String notValidPath3 = "out/artifacts/Configuration_jar/resources/config.ini|";
+        String logLevel = "warn";
+
+        String expectedMessage = "Not correct logFilePath!";
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () ->
+                {
+                    new Configuration(notValidPath1, logLevel);
+                    new Configuration(notValidPath2, logLevel);
+                    new Configuration(notValidPath3, logLevel);
+                });
+        String actualMessage = exception.getMessage();
+        assertTrue(expectedMessage.contains(actualMessage));
+    }
 }

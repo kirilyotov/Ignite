@@ -1,55 +1,42 @@
 package digital.lights.factory;
 
+
 import digital.lights.configuration.Configuration;
 import org.apache.commons.cli.CommandLine;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.regex.Pattern;
+
+import static digital.lights.path.validator.PathValidator.*;
 
 public class ConfigurationReaderFactory {
 
-    //TODO: Move checks in other class and make tests!
-    //TODO: Create custom exception!
-
-    private static boolean hasExtension(String line, int index){
-        String extension = line.substring(index).trim();
-        return Pattern.matches("^[.]\\w*$", extension);
-    }
-
-    //Possible character list a-z, A-Z, \, /, .,
-    private static boolean isCorrectPath(String line){
-        return Pattern.matches("^\\s*[.\\w\\s\\\\/]*\\s*$", line);
-    }
-
-    private static boolean hasSymbolsAfterDot(String line, int index){
-        return  index > 0 && index != line.length();
-    }
     private static String firstLetterToUpper(String line) {
         return line.substring(0, 1).toUpperCase() + line.substring(1);
     }
 
     private static String getFileType(CommandLine cmd) {
         String line = cmd.getOptionValue("c");
-        int index = line.lastIndexOf(".");
 
-        if(!isCorrectPath(line)){
+        if (!isValidPath(line)) {
             throw new IllegalArgumentException("Not correct path!");
         }
 
-        if(!hasSymbolsAfterDot(line, index) || !hasExtension(line, index)){
+        if (!hasExtension(line)) {
             throw new IllegalArgumentException("Not correct extension!");
         }
+        if (!fileExists(line)) {
+            throw new IllegalArgumentException("File does not exists!");
+        }
 
-        return line.substring(index + 1);
+        return getExtension(line);
     }
 
 
     public static Configuration crete(CommandLine cmd) {
-
         String fileExtension = firstLetterToUpper(getFileType(cmd));
 
-        String className = ConfigurationReader.class.getPackageName() + fileExtension +
-                ConfigurationReader.class.getName() ;
+        String className = ConfigurationReader.class.getPackageName() + "." + fileExtension +
+                ConfigurationReader.class.getSimpleName();
 
         ConfigurationReader configurationReader;
 
@@ -58,10 +45,8 @@ public class ConfigurationReaderFactory {
             configurationReader = (ConfigurationReader) configuration.getConstructor().newInstance();
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             throw new RuntimeException("File type not found!");
-        } catch (InvocationTargetException | InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException("Problem with reading file!");
         }
 
         return configurationReader.create(cmd);

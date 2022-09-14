@@ -12,7 +12,7 @@ public class IniConfigurationReader implements ConfigurationReader {
         try {
             configuration = new HierarchicalINIConfiguration(cmd.getOptionValue("c"));
         } catch (ConfigurationException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Problem with reading file!");
         }
         return new Configuration(configuration.getString("log.LogPath"), configuration.getString("log.LogLevel"));
     }

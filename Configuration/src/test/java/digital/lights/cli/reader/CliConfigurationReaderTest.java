@@ -6,15 +6,20 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CliConfigurationReaderTest {
+    String logLevel = "warn";
+
+    String[] createArgs(String logPath) {
+        return new String[]{"--log-path=" + logPath, "--log-level=" + logLevel};
+    }
+
     @Test
     void createAssertCorrectParameters() throws ParseException {
         //Arrange
         String expectedLogPath = "C:\\Temp";
-        String expectedLogLevel = "warn";
-        String[] args = {"--log-path=" + expectedLogLevel, "--log-level=" + expectedLogPath};
+        String[] args = createArgs(expectedLogPath);
 
         //Act
         CommandLine cmd = CmdParser.parse(args);
@@ -22,6 +27,48 @@ class CliConfigurationReaderTest {
 
         //Assert
         assertTrue(expectedLogPath.contains(configuration.getLogFilePath()));
-        assertTrue(expectedLogLevel.contains(configuration.getLogLevel()));
+        assertTrue(logLevel.contains(configuration.getLogLevel()));
     }
+
+    @Test
+    void createAssertNotCorrectLogPathQuestionMarkInPath() throws ParseException {
+        //Arrange
+        String expectedLogPath = "C:\\Temp?";
+        String[] args = createArgs(expectedLogPath);
+
+        CommandLine cmd = CmdParser.parse(args);
+        String expectedMessage = "Not correct logFilePath!";
+        //Assert
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> {
+                    //Act
+                    Configuration configuration = CliConfigurationReader.create(cmd);
+                });
+        String actualMessage = exception.getMessage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+
+    }
+
+    @Test
+    void createAssertNotCorrectLogPathEmptyStringGiven() throws ParseException {
+        //Arrange
+        String expectedLogPath = "";
+        String[] args = createArgs(expectedLogPath);
+
+        CommandLine cmd = CmdParser.parse(args);
+        String expectedMessage = "Not correct logFilePath!";
+        //Assert
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> {
+                    //Act
+                    Configuration configuration = CliConfigurationReader.create(cmd);
+                });
+        String actualMessage = exception.getMessage();
+
+        //Assert
+        assertEquals(expectedMessage, actualMessage);
+    }
+
 }
